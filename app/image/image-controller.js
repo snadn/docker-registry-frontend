@@ -8,34 +8,15 @@
  * Controller of the docker-registry-frontend
  */
 angular.module('image-controller', ['registry-services', 'app-mode-services'])
-  .controller('ImageController', ['$scope', '$route', '$routeParams', '$location', '$log', '$filter', 'Manifest', 'AppMode',
-  function($scope, $route, $routeParams, $location, $log, $filter, Manifest, AppMode){
-    
+  .controller('ImageController', ['$scope', '$route', '$routeParams', '$location', '$log', '$filter', 'Manifest', 'Blob', 'AppMode',
+  function($scope, $route, $routeParams, $location, $log, $filter, Manifest, Blob, AppMode){
 
     $scope.appMode = AppMode.query();
-    $scope.totalImageSize = 0;
-    $scope.imageDetails = Manifest.query({repository: $scope.repository, tagName: $scope.tagName});
+    $scope.details = Manifest.query({repository: $scope.repository, tagName: $scope.tagName});
 
+    $scope.config = {};
+    $scope.details.$promise.then(function(data) {
+      $scope.config = Blob.query({repository: $scope.repository, digest: data.config.digest});
+    });
 
-
-    // This is not totally working right now (problem with big layers)
-    /**
-     * Calculates the total download size for the image based on
-     * it's layers.
-     */
-    /*
-    $scope.totalImageSize = null;
-    $scope.calculateTotalImageSize = function() {
-      $scope.totalImageSize = 0;
-      var size;
-      angular.forEach($scope.imageDetails.fsLayers, function (id, key) {
-        Blob.query({repository: $scope.repository, digest: id.blobSum}).$promise.then(function(data){
-          if(!isNaN(data.contentLength-0)){
-            $scope.totalImageSize += data.contentLength;
-          }
-        });
-      });
-    };
-    */
-    
   }]);

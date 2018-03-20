@@ -79,7 +79,7 @@
       Dockerfile
     </tab-heading>
     <pre>
-      <code ng-repeat="instruction in config.dockerfile">
+      <code ng-repeat="instruction in config.dockerfile track by $index">
 {{instruction}}
       </code>
     </pre>

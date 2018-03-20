@@ -43,10 +43,12 @@
   },
   "scripts": {
     "server": "grunt serve",
-    "postinstall": "bower install",
+    "postinstall": "bower install --allow-root",
     "pretest": "npm install",
     "test": "karma start test/karma.conf.js",
-    "test-single-run": "karma start test/karma.conf.js --single-run"
+    "test-single-run": "karma start test/karma.conf.js --single-run",
+    "release": "grunt build && sh app-version.sh",
+    "docker": "npm run release && docker build -t snadn/docker-registry-frontend:v2 ./"
   },
   "description": "A pure web-based frontend to a docker-registry",
   "main": "Gruntfile.js",

@@ -25,13 +25,14 @@ angular.module('repository-list-controller', ['ngRoute', 'ui.bootstrap', 'regist
     // How to query the repository
     if ($route.current.params.reposPerPage) {
       $scope.reposPerPage = parseInt($route.current.params.reposPerPage, 10);
+      if (Number.isNaN($scope.reposPerPage)) {
+        $scope.searchTerm = $route.current.params.reposPerPage;
+      }
     }
     $scope.lastNamespace = $route.current.params.lastNamespace;
     $scope.lastRepository = $route.current.params.lastRepository;
     var queryObject = {};
-    if ($scope.reposPerPage) {
-      queryObject['n'] = $scope.reposPerPage;
-    }
+    queryObject['n'] = $scope.reposPerPage || 9999;
     if ($scope.lastNamespace && $scope.lastRepository) {
       queryObject['last'] = ''+$scope.lastNamespace+'/'+$scope.lastRepository;
     }

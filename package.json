@@ -5,9 +5,9 @@
   "devDependencies": {
     "bower": "^1.7.2",
     "connect-modrewrite": "^0.8.2",
-    "grunt": "^0.4.1",
+    "grunt": "1.0.4",
     "grunt-autoprefixer": "^3.0.3",
-    "grunt-cli": "^0.1.13",
+    "grunt-cli": "1",
     "grunt-concurrent": "^2.1.0",
     "grunt-connect-proxy": "^0.2.0",
     "grunt-contrib-clean": "^0.7.0",
@@ -47,7 +47,7 @@
     "pretest": "npm install",
     "test": "karma start test/karma.conf.js",
     "test-single-run": "karma start test/karma.conf.js --single-run",
-    "release": "grunt build && sh app-version.sh",
+    "release": "grunt build --force && sh app-version.sh",
     "docker": "npm run release && docker build -t snadn/docker-registry-frontend:v2 ./"
   },
   "description": "A pure web-based frontend to a docker-registry",

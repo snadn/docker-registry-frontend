@@ -11,7 +11,7 @@
     <span class="input-group-addon">Repositories <span ng-bind-template="({{filteredRepositories.length}}/{{repositories.repos.length}})"></span></span>
 </div>
 
-<div ng-hide="appMode.browseOnly">
+<div ng-hide="true">
   <!-- Maybe put this into its own directive? -->
   <button type="button" ng-disabled="!selectedRepositories.length" ng-click="openConfirmRepoDeletionDialog()" class="btn btn-danger">
     <span class="glyphicon glyphicon-trash"></span>
